@@ -39,6 +39,7 @@ fn get_form(request: &mut Request) -> IronResult<Response> {
 fn post_gcd(request: &mut Request) -> IronResult<Response> {
     let mut response = Response::new();
 
+    // 获取表单数据
     let hashmap;
     match request.get_ref::<UrlEncodedBody>() {
         Err(e) => {
@@ -51,6 +52,7 @@ fn post_gcd(request: &mut Request) -> IronResult<Response> {
         }
     }
 
+    // 通过名字查询表单数据
     let unparsed_numbers;
     match hashmap.get("n") {
         None => {
@@ -63,6 +65,7 @@ fn post_gcd(request: &mut Request) -> IronResult<Response> {
         }
     }
 
+    // 解析表单数据
     let mut numbers = Vec::new();
     for unparsed in unparsed_numbers {
         match u64::from_str(&unparsed) {
